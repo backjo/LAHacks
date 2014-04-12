@@ -17,7 +17,7 @@ block content
     .form-group
       label.col-sm-2.control-label(for='university') University
       .col-sm-4
-        input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
+        input.form-control(type='text', name='university', id='university', value='#{user.profile.location}')
     .form-group
       label.col-sm-2.control-label(for='website') Website
       .col-sm-4
@@ -26,6 +26,9 @@ block content
       label.col-sm-2.control-label(for='gravatar') Gravatar
       .col-sm-4
         img(src="#{user.gravatar()}", class='profile', width='100', height='100')
+    .form-group
+      .col-sm-4
+        input.form-control(type='hidden', name='isaa', id='isaa', value='#{user.profile.isaa}')
     .form-group
       .col-sm-offset-2.col-sm-4
         button.btn.btn.btn-primary(type='submit')
