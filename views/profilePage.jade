@@ -1,21 +1,18 @@
 extends layout
 
 block content
+
       h2
-        img(src="#{user.gravatar()}",height="200", width="200")
+        #container.profileLeft
+          img(src="#{user.gravatar()}",height="200", width="200")
+        #container.profileRight
       h3
-         |#{user.profile.name}
-         br
-         |#{user.email}
+        |#{user.profile.name}
+        br
+        |#{user.email}
       h4
-         |HACKATHON EXPERIENCE
-      h5
-         |#{gearString}
-      h4
-         |RESUME/LINKEDIN
-      h5
-         |#{user.profile.interest}
-      h4
-         |ACHIEVEMENTS
-      h5
-         |#{user.profile.experience}
+        |RESUME/LINKEDIN
+        br
+        |HACKATHON EXPERIENCE
+        br
+        |ACHIEVEMENTS
