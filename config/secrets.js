@@ -24,7 +24,7 @@ module.exports = {
     secret: process.env.LASTFM_SECRET || 'Your API Secret'
   },
 
-  facebookAuth: true,
+  facebookAuth: false,
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'Your App ID',
     clientSecret: process.env.FACEBOOK_SECRET || 'Your App Secret',
@@ -32,7 +32,7 @@ module.exports = {
     passReqToCallback: true
   },
 
-  githubAuth: true,
+  githubAuth: false,
   github: {
     clientID: process.env.GITHUB_ID || 'Your Client ID',
     clientSecret: process.env.GITHUB_SECRET || 'Your Client Secret',
@@ -42,13 +42,13 @@ module.exports = {
 
   twitterAuth: true,
   twitter: {
-    consumerKey: process.env.TWITTER_KEY || 'Your Consumer Key',
-    consumerSecret: process.env.TWITTER_SECRET  || 'Your Consumer Secret',
+    consumerKey: process.env.TWITTER_KEY || '4ZtV9VHceQp3WKtKwZgLoxczC',
+    consumerSecret: process.env.TWITTER_SECRET  || '1lMHodvLSLlTbibYSzOaY8Sih0NSviBrdXHbSCrBqFmxcIpRbY',
     callbackURL: '/auth/twitter/callback',
     passReqToCallback: true
   },
 
-  googleAuth: true,
+  googleAuth: false,
   google: {
     clientID: process.env.GOOGLE_ID || 'Your Client ID',
     clientSecret: process.env.GOOGLE_SECRET || 'Your Client Secret',
@@ -56,7 +56,7 @@ module.exports = {
     passReqToCallback: true
   },
 
-  linkedinAuth: true,
+  linkedinAuth: false,
   linkedin: {
     clientID: process.env.LINKEDIN_ID || 'Your Client ID',
     clientSecret: process.env.LINKEDIN_SECRET || 'Your Client Secret',

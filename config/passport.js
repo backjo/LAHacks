@@ -188,7 +188,7 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
       user.twitter = profile.id;
       user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
       user.profile.name = profile.displayName;
-      user.profile.location = profile._json.location;
+      //user.profile.location = profile._json.location;
       user.profile.picture = profile._json.profile_image_url;
       user.save(function(err) {
         done(err, user);
