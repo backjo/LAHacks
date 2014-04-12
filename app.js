@@ -58,6 +58,7 @@ app.use(connectAssets({
   helperContext: app.locals
 }));
 app.use(express.compress());
+app.use(express.favicon("public/img/favicon.ico"));
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.json());
