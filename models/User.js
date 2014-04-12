@@ -6,6 +6,10 @@ var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
 
+  isSponsor: {type: Boolean, default: false},
+
+  isOrganizer: {type: Boolean, default: false},
+
   facebook: String,
   twitter: String,
   google: String,
