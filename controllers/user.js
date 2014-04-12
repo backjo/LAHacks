@@ -383,3 +383,8 @@ exports.getAchievements = function(req, res, next)
 {
   res.render('achievements');
 };
+
+exports.getProfilePage = function(req, res, next)
+{
+  res.render('profilePage');
+};
