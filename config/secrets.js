@@ -5,14 +5,14 @@ module.exports = {
 
   localAuth: true,
 
-  mailgun: {
-    login: process.env.MAILGUN_LOGIN || 'Your Mailgun SMTP Username',
-    password: process.env.MAILGUN_PASSWORD || 'Your Mailgun SMTP Password'
-  },
+  // mailgun: {
+  //   login: process.env.MAILGUN_LOGIN || 'Your Mailgun SMTP Username',
+  //   password: process.env.MAILGUN_PASSWORD || 'Your Mailgun SMTP Password'
+  // },
 
   sendgrid: {
-    user: process.env.SENDGRID_USER || 'Your SendGrid Username',
-    password: process.env.SENDGRID_PASSWORD || 'Your SendGrid Password'
+    user: process.env.SENDGRID_USER || 'kchan039',
+    password: process.env.SENDGRID_PASSWORD || 'kc093093'
   },
 
   nyt: {
@@ -48,20 +48,20 @@ module.exports = {
     passReqToCallback: true
   },
 
-  googleAuth: false,
+  googleAuth: true,
   google: {
-    clientID: process.env.GOOGLE_ID || 'Your Client ID',
-    clientSecret: process.env.GOOGLE_SECRET || 'Your Client Secret',
+    clientID: process.env.GOOGLE_ID || '81630051146-nmc5sjakll1ebj7bgn763tbr3nn63ifj.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'oT0hOgLBvVUbtldtPlRZvpDU',
     callbackURL: '/auth/google/callback',
     passReqToCallback: true
   },
 
-  linkedinAuth: false,
+  linkedinAuth: true,
   linkedin: {
-    clientID: process.env.LINKEDIN_ID || 'Your Client ID',
-    clientSecret: process.env.LINKEDIN_SECRET || 'Your Client Secret',
+    clientID: process.env.LINKEDIN_ID || '75su4tqs0y5ofe',
+    clientSecret: process.env.LINKEDIN_SECRET || 'mdSVEx9pSSwZRNZs',
     callbackURL: '/auth/linkedin/callback',
-    scope: ['r_fullprofile', 'r_emailaddress', 'r_network'],
+    scope: ['r_basicprofile'],
     passReqToCallback: true
   },
 
