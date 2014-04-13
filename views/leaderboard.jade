@@ -4,15 +4,4 @@ block content
   .page-header
     h2 Sponsor Leaderboards
   if user.isSponsor
-    th Title
-    th Description
-    th QR Code
-      tbody
-        each member in achievements
-          tr
-          td=member.label
-          td=member.description
-          td
-            a(href="#{member.qr}") QR Code
   if user.isUser
-    a(class)
