@@ -27,7 +27,7 @@ module.exports = {
     secret: process.env.LASTFM_SECRET || 'Your API Secret'
   },
 
-  facebookAuth: true,
+  facebookAuth: false,
   facebook: {
     clientID: process.env.FACEBOOK_ID || '525999700842577',
     clientSecret: process.env.FACEBOOK_SECRET || '79e166238c4d1738c5afeedd6e9b6b36',

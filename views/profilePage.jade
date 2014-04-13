@@ -1,24 +1,25 @@
 extends layout
-
 block content
-      h2
-        img(src="#{user.gravatar()}",height="200", width="200")
-      h3
-         b
-           |#{user.profile.name}
-         br
-         |#{user.email}
-         br
-         a(href='#{user.profile.website}') #{user.profile.website}
-      h4
-         |PRIOR HACKATHONS
-      h5
-         |#{gearString}
-      h4
-         |RESUME/LINKEDIN
-      h5
-         |#{user.profile.interest}
-      h4
-         |ACHIEVEMENTS
-      h5
-         |#{user.profile.experience}
+   h2
+     img(src="#{user.gravatar()}",height="200", width="200")
+   h3
+      b
+        |#{user.profile.name}
+      br
+      |#{user.email}
+      br
+      a(href='#{user.profile.website}') #{user.profile.website}
+   h4
+      |PRIOR HACKATHONS
+   h5
+      |#{gearString}
+   h4
+      a(href='#{user.profile.linkedin}')|LINKEDIN
+      
+   h5
+      |#{user.profile.interest}
+   h4
+      |ACHIEVEMENTS
+   h5
+      |#{user.profile.experience}
+
