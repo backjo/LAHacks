@@ -468,8 +468,8 @@ exports.postAchievement = function(req, res, next)
 exports.earnAchievement = function(req, res, next) {
   var hash = crypto.createHash('md5').update('salty' + String(req.params.id) ).digest('hex').toString();
   if(hash === req.params.hash) {
-    user.achievements.push_back(Number(req.params.id));
-    user.save();
+    req.user.achievements.push_back(Number(req.params.id));
+    req.user.save();
     isaaClient.getAchievement(req.params.id, {}, function(err, data, request) {
       isaaClient.updateAchievement(req.params.id, {
         rank: data.body.rank + 1
