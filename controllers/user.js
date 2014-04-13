@@ -460,3 +460,8 @@ exports.getProfilePage = function(req, res, next)
 {
   res.render('profilePage');
 };
+
+exports.getLeaderboard = function(req, res, next)
+{
+  res.render('leaderboard');
+}
