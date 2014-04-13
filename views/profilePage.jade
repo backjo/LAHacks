@@ -1,0 +1,23 @@
+extends layout
+
+block content
+      h2
+        img(src="#{user.gravatar()}",height="200", width="200")
+      h3
+         |#{user.profile.name}
+         br
+         |#{user.email}
+         br
+         a(href='#{user.profile.website}') #{user.profile.website}
+      h4
+         |HACKATHON EXPERIENCE
+      h5
+         |#{gearString}
+      h4
+         |RESUME/LINKEDIN
+      h5
+         |#{user.profile.interest}
+      h4
+         |ACHIEVEMENTS
+      h5
+         |#{user.profile.experience}
