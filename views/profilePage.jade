@@ -4,13 +4,14 @@ block content
       h2
         img(src="#{user.gravatar()}",height="200", width="200")
       h3
-         |#{user.profile.name}
+         b
+           |#{user.profile.name}
          br
          |#{user.email}
          br
          a(href='#{user.profile.website}') #{user.profile.website}
       h4
-         |HACKATHON EXPERIENCE
+         |PRIOR HACKATHONS
       h5
          |#{gearString}
       h4
