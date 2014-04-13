@@ -26,7 +26,8 @@ var userSchema = new mongoose.Schema({
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     picture: { type: String, default: '' },
-    linkedin: { type: String, default: '' }
+    linkedin: { type: String, default: '' },
+    resume: { type: String, default: '' }
   },
 
   resetPasswordToken: String,
