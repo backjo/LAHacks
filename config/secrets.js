@@ -10,7 +10,7 @@ module.exports = {
   //   password: process.env.MAILGUN_PASSWORD || 'Your Mailgun SMTP Password'
   // },
   isaa: {
-    key: "6a8a9d7721ecefc7293fae444325177"
+    key: "4237af46eac9f6f624ac482633bf788"
   },
 
   sendgrid: {
