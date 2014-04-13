@@ -6,7 +6,8 @@ var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
 var isaa = require('../views/lib/isaa');
-var isaaClient = new isaa('2b56f4247fed30f42c74275f8ed125f5');
+var isaaClient = new isaa(secrets.isaa.key);
+
 
 /**
  * GET /login
@@ -386,9 +387,19 @@ exports.getAchievements = function(req, res, next)
   isaaClient.getAchievements({},function(err, data, response) {
     //console.log(err);
     //console.log(data.body);
+    qrCodes = [];
+    var idx = 0;
+    for(idx = 0; idx<data.body.length; idx++) {
+      var apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x150&data=';
+      var baseURL = 'https://hackerachievements.com/achievements/';
+      var id = data.body[idx].id;
+      var hash = crypto.createHash('md5').update('salty' + String(id)).digest('hex').toString();
+      data.body[idx].qr = apiUrl + baseURL + id + '/' + hash;
+    }
     res.render('achievements', {
       achievements: data.body
     });
+
   });
 
 };
@@ -428,6 +439,13 @@ exports.postAchievement = function(req, res, next)
     console.log(data);
   });
   res.redirect('/achievements');
+}
+
+exports.earnAchievement = function(req, res, next) {
+  var hash = crypto.createHash('md5').update('salty' + String(req.params.id) ).digest('hex').toString();
+  if(hash === req.params.hash) {
+
+  }
 }
 
 exports.getProfilePage = function(req, res, next)

@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
+var secrets = require('../config/secrets')
+var isaa = require('../views/lib/isaa');
 
 var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
@@ -15,6 +17,7 @@ var userSchema = new mongoose.Schema({
   google: String,
   github: String,
   linkedin: String,
+  isaa: {type:String, default: ''},
   tokens: Array,
 
   profile: {
@@ -78,5 +81,6 @@ userSchema.methods.gravatar = function(size, defaults) {
   var md5 = crypto.createHash('md5').update(this.email);
   return 'https://gravatar.com/avatar/' + md5.digest('hex').toString() + '?s=' + size + '&d=' + defaults;
 };
+
 
 module.exports = mongoose.model('User', userSchema);

@@ -10,6 +10,7 @@ var OAuthStrategy = require('passport-oauth').OAuthStrategy; // Tumblr
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy; // Venmo, Foursquare
 var User = require('../models/User');
 var secrets = require('./secrets');
+var isaa = require('../views/lib/isaa');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -20,6 +21,16 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
+var createIsaa = function(user) {
+  console.log('create called');
+  var isaaClient = new isaa(secrets.isaa.key);
+  isaaClient.createUser({email:user.email}, function(err, data, response) {
+    console.log(err);
+    user.isaa = data.body.id;
+    user.save();
+  });
+};
 
 /**
  * Sign in using Email and Password.
@@ -94,6 +105,7 @@ passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, r
           user.profile.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.profile.location = (profile._json.location) ? profile._json.location.name : '';
           user.save(function(err) {
+            createIsaa(user);
             done(err, user);
           });
         }
@@ -144,6 +156,7 @@ passport.use(new GitHubStrategy(secrets.github, function(req, accessToken, refre
           user.profile.location = profile._json.location;
           user.profile.website = profile._json.blog;
           user.save(function(err) {
+            createIsaa(user);
             done(err, user);
           });
         }
@@ -191,6 +204,7 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
       //user.profile.location = profile._json.location;
       user.profile.picture = profile._json.profile_image_url;
       user.save(function(err) {
+        createIsaa(user);
         done(err, user);
       });
     });
@@ -237,6 +251,7 @@ passport.use(new GoogleStrategy(secrets.google, function(req, accessToken, refre
           user.profile.gender = profile._json.gender;
           user.profile.picture = profile._json.picture;
           user.save(function(err) {
+            createIsaa(user);
             done(err, user);
           });
         }
@@ -290,6 +305,7 @@ passport.use(new LinkedInStrategy(secrets.linkedin, function(req, accessToken, r
           user.profile.picture = profile._json.pictureUrl;
           user.profile.website = profile._json.publicProfileUrl;
           user.save(function(err) {
+            createIsaa(user);
             done(err, user);
           });
         }

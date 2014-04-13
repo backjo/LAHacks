@@ -90,7 +90,7 @@ app.use(function(req, res, next) {
   if (req.method !== 'GET') return next();
   var path = req.path.split('/')[1];
   if (/(auth|login|logout|signup)$/i.test(path)) return next();
-  req.session.returnTo = req.path;
+  req.session.authReturnPage = req.path;
   next();
 });
 app.use(app.router);
@@ -120,6 +120,7 @@ app.get('/achievements', userController.getAchievements);
 app.get('/achievements/add', userController.addAchievement);
 app.post('/achievements/add', userController.postAchievement);
 app.get('/achievements/:id', userController.getAchievement);
+app.get('/achievements/:id/:hash', passportConf.isAuthenticated,  userController.earnAchievement);
 app.get('/profilePage', passportConf.isAuthenticated, userController.getProfilePage);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

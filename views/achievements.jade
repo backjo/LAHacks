@@ -5,13 +5,16 @@ block content
     h2 Achievements
   if user.isSponsor
     a(class="btn btn-primary" role="button" href="/achievements/add") Add Achievement
-  table(class="table")
-    thead
-      tr
-       th Title
-       th Description
-    tbody
-      each member in achievements
+    table(class="table")
+      thead
         tr
-          td=member.label
-          td=member.description
+         th Title
+         th Description
+         th QR Code
+      tbody
+        each member in achievements
+          tr
+            td=member.label
+            td=member.description
+            td
+              a(href="#{member.qr}") QR Code
