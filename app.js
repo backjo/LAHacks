@@ -11,6 +11,8 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var connectAssets = require('connect-assets');
 
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 /**
  * Load controllers.
  */
@@ -115,6 +117,9 @@ app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/achievements', userController.getAchievements);
+app.get('/achievements/add', userController.addAchievement);
+app.post('/achievements/add', userController.postAchievement);
+app.get('/achievements/:id', userController.getAchievement);
 app.get('/profilePage', passportConf.isAuthenticated, userController.getProfilePage);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

@@ -5,6 +5,8 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
+var isaa = require('../views/lib/isaa');
+var isaaClient = new isaa('2b56f4247fed30f42c74275f8ed125f5');
 
 /**
  * GET /login
@@ -381,8 +383,52 @@ exports.postForgot = function(req, res, next) {
 
 exports.getAchievements = function(req, res, next)
 {
-  res.render('achievements');
+  isaaClient.getAchievements({},function(err, data, response) {
+    //console.log(err);
+    //console.log(data.body);
+    res.render('achievements', {
+      achievements: data.body
+    });
+  });
+
 };
+
+exports.getAchievement = function(req, res, next)
+{
+  res.render('achievement/detail', {
+    title: "Achievement"
+  });
+};
+
+exports.addAchievement = function(req, res, next)
+{
+  res.render('achievement/add', {
+    title: "Achievement"
+  });
+};
+
+exports.postAchievement = function(req, res, next)
+{
+
+  var options = {
+    achievementType: "PROGRESSIVE",
+    data: {
+        link: "www.example.com/1"
+    },
+    description: req.body.summary,
+    label: req.body.title,
+    level: 1,
+    name: "nospaces",
+    rank: 0
+  }
+
+  //console.log(options);
+  isaaClient.createAchievement(options, function(err, data, request) {
+    console.log(err);
+    console.log(data);
+  });
+  res.redirect('/achievements');
+}
 
 exports.getProfilePage = function(req, res, next)
 {

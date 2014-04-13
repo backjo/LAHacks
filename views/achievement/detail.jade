@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h4 Achievement:Hi
+  h5 Unlocked
+  table(class="table")
+    thead
+      tr
+       th First
+       th Last
+    tbody
+      each member in []
+        tr
+          td=member.profile.firstName
+          td=member.profile.lastName
+
+          tr
+            td=member.profile.firstName
+            td=member.profile.lastName

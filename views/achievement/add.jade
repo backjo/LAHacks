@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+
+  form.form-horizontal(id='signup-form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    legend Add New Achievement
+    .form-group
+      label.col-sm-3.control-label(for='title') Name
+      .col-sm-7.input_group
+        input.form-control(type='text', name='title', id='title', placeholder='Organization Event', autofocus)
+    .form-group
+      label.col-sm-3.control-label(for='location') Location
+      .col-sm-7.input_group
+        input.form-control(type='text', name='location', id='location', placeholder='Pauley Pavilion', autofocus)
+    .form-group
+      label.col-sm-3.control-label(for='summary') Description
+      .col-sm-7
+        input.form-control(type='text', name='summary', id='summary', placeholder='Lorem Ipsum')
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit')
+          i.fa.fa-check
+          | Add Achievement
+  link(rel='stylesheet', href='/css/bootstrap-datepicker.css')
+  script(type='text/javascript', src='/js/bootstrap-datepicker.js')
