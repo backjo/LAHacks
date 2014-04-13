@@ -445,7 +445,14 @@ exports.postAchievement = function(req, res, next)
 exports.earnAchievement = function(req, res, next) {
   var hash = crypto.createHash('md5').update('salty' + String(req.params.id) ).digest('hex').toString();
   if(hash === req.params.hash) {
-
+    console.log(req.params.id);
+    console.log(req.user.isaa);
+    isaaClient.addAchievementToUser(req.user.isaa, {
+      achievement: Number(req.params.id)
+    }, function(err, data, response) {
+      //console.log(err);
+      //console.log(data);
+    });
   }
 }
 

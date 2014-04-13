@@ -12,6 +12,7 @@ var api = function(clientID) {
   }
 
   this.makePostRequest = function(options, callback) {
+    console.log(options);
     options.method = "POST";
     this.makeRequest(options, callback);
   }
@@ -43,6 +44,14 @@ var api = function(clientID) {
   this.createUserWithExternalId = function(currentID, options, callback) {
     this.makePostRequest({
       url: baseURL + '/admin/users/'+currentID + '/externalids',
+      json: options,
+      headers: {}
+    }, callback);
+  }
+
+  this.addAchievementToUser = function(userID, options, callback) {
+    this.makePostRequest({
+      url: baseURL + '/admin/users/' + userID + '/gainedachievements',
       json: options,
       headers: {}
     }, callback);

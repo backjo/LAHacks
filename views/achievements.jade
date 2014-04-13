@@ -2,8 +2,10 @@ extends layout
 
 block content
   .page-header
-    h2 Achievements
+  h2 Achievements
+
   if user.isSponsor
+    h2 Sponsored Achievements
     a(class="btn btn-primary" role="button" href="/achievements/add") Add Achievement
     table(class="table")
       thead
