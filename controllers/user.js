@@ -386,6 +386,7 @@ exports.postForgot = function(req, res, next) {
 
 exports.getAchievements = function(req, res, next)
 {
+    var achievements = [], gained = [];
   isaaClient.getAchievements({},function(err, data, response) {
     //console.log(err);
     //console.log(data.body);
@@ -394,7 +395,7 @@ exports.getAchievements = function(req, res, next)
     var hashtable = [];
     for(idx = 0; idx<data.body.length; idx++) {
       var apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x150&data=';
-      var baseURL = 'https://hackerachievements.com/achievements/';
+      var baseURL = 'http://hackerachievements.com/achievements/';
       var id = data.body[idx].id;
       var hash = crypto.createHash('md5').update('salty' + String(id)).digest('hex').toString();
       data.body[idx].qr = apiUrl + baseURL + id + '/' + hash;
@@ -402,12 +403,16 @@ exports.getAchievements = function(req, res, next)
       hashtable[data.body[idx].id].label = data.body[idx].label;
       hashtable[data.body[idx].id].description = data.body[idx].description;
     }
+      if(data.body && data.body.length >0)
+	  achievements = data.body;
     isaaClient.getGainedAchievements(req.user.isaa, {},  function(err, data2, response) {
       console.log(data2.body);
+	if(data2.body && data2.body.length >0)
+	    gained = data2.body;
 
       res.render('achievements', {
-        achievements: data.body,
-        gained: data2.body,
+        achievements: achievements || [],
+        gained: gained || [],
         hashtable: hashtable
       });
     })
