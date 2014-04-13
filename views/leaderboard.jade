@@ -1,7 +1,53 @@
 extends layout
 
 block content
-  .page-header
-    h2 Sponsor Leaderboards
+  h1 Leaderboards
   if user.isSponsor
-  if user.isUser
+    h2 Top 5 Sponsors!
+    table(class="table")
+      thead
+      tr
+      th Sponsors
+      th Number Achieved
+      h3 
+      tbody
+        tr
+          th IsaaCloud
+          th 15
+        tr
+          th Cisco
+          th 10
+        tr
+          th Namecheap
+          th 9
+        tr
+          th SendGrid
+          th 8
+        tr
+          th GraceNote
+          th 2
+  if !user.isSponsor
+    h2 Top 5 Hackers!
+    table(class="table")
+      thead
+      tr
+      th Hackers
+      th Sponsors Talked Too
+      h3 
+      tbody
+        tr
+          th Jonah Back
+          th 15
+        tr
+          th Ken Addison
+          th 10
+        tr
+          th Kevin Chan
+          th 9
+        tr
+          th Kevin Hsieh
+          th 8
+        tr
+          th Rachel Law
+          th 8
+
