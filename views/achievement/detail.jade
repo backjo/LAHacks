@@ -12,9 +12,5 @@ block content
     tbody
       each member in users
         tr
-          td=member.profile.firstName
-          td=member.profile.lastName
-
-          tr
-            td=member.profile.firstName
-            td=member.profile.lastName
+          td #{member.profile.firstName}
+          td #{member.profile.lastName}
