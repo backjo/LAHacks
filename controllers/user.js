@@ -419,9 +419,15 @@ exports.getAchievements = function(req, res, next)
 
 exports.getAchievement = function(req, res, next)
 {
-  res.render('achievement/detail', {
-    title: "Achievement"
-  });
+  User.find({
+        'achievements': { $in:[Number(req.params.id)]}
+      }, function(err, users) {
+        res.render('achievement/detail', {
+          title: "Achievement",
+          users: users
+        });
+  })
+
 };
 
 exports.addAchievement = function(req, res, next)
@@ -457,7 +463,8 @@ exports.postAchievement = function(req, res, next)
 exports.earnAchievement = function(req, res, next) {
   var hash = crypto.createHash('md5').update('salty' + String(req.params.id) ).digest('hex').toString();
   if(hash === req.params.hash) {
-
+    user.achievements.push_back(Number(req.params.id));
+    user.save();
     isaaClient.getAchievement(req.params.id, {}, function(err, data, request) {
       isaaClient.updateAchievement(req.params.id, {
         rank: data.body.rank + 1

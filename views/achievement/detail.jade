@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  h4 Achievement: 
+  h4 Achievement:
   #{'member.description'}
   h5 Unlocked
   table(class="table")
@@ -10,7 +10,7 @@ block content
        th First
        th Last
     tbody
-      each member in []
+      each member in users
         tr
           td=member.profile.firstName
           td=member.profile.lastName

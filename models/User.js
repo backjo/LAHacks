@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
   linkedin: String,
   isaa: {type:String, default: ''},
   tokens: Array,
+  achievements: Array,
 
   profile: {
     name: { type: String, default: '' },
