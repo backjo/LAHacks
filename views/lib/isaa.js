@@ -8,6 +8,7 @@ var api = function(clientID) {
     //TODO add clientID to requests
     options.headers['Content-Type'] = "application/json";
     options.headers['Authorization'] = "Bearer " + this.clientID;
+    options.rejectUnauthorized =  false;
     request(options, callback)
   }
 
@@ -25,6 +26,23 @@ var api = function(clientID) {
     }, callback);
   }
 
+  this.updateAchievement = function(id, options, callback) {
+    this.makeRequest({
+      url: baseURL + "/admin/achievements/" + String(id),
+      method: "PUT",
+      json: options,
+      headers: {}
+    }, callback);
+  }
+
+  this.getAchievement = function(id, options, callback) {
+    this.makeRequest({
+      url: baseURL + "/admin/achievements/" + id,
+      json: options,
+      headers: {}
+    }, callback);
+  }
+
   this.getAchievements = function(options, callback) {
     this.makeRequest({
       url: baseURL + "/admin/achievements",
@@ -34,8 +52,14 @@ var api = function(clientID) {
   }
 
   this.createUser = function(options, callback) {
+    var extra = '?order=rank%3ADESC';
+    if(options.rank) {
+      console.log('getting in order')
+      extra = '?order=rank%3ADESC';
+      options.body = 'order=%3ADESC';
+    }
     this.makePostRequest({
-      url: baseURL + '/admin/users',
+      url: baseURL + '/admin/users' + extra,
       json: options,
       headers: {}
     }, callback);
@@ -51,6 +75,14 @@ var api = function(clientID) {
 
   this.addAchievementToUser = function(userID, options, callback) {
     this.makePostRequest({
+      url: baseURL + '/admin/users/' + userID + '/gainedachievements',
+      json: options,
+      headers: {}
+    }, callback);
+  }
+
+  this.getGainedAchievements = function(userID, options, callback) {
+    this.makeRequest({
       url: baseURL + '/admin/users/' + userID + '/gainedachievements',
       json: options,
       headers: {}

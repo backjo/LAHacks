@@ -3,6 +3,17 @@ extends layout
 block content
   .page-header
   h2 Achievements
+  table(class="table")
+    thead
+      tr
+       th Title
+       th Description
+    tbody
+      each member in gained
+        tr
+          td=hashtable[member.achievement].label
+          td=hashtable[member.achievement].description
+
 
   if user.isSponsor
     h2 Sponsored Achievements

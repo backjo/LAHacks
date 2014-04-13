@@ -9,23 +9,13 @@ block content
       tr
       th Sponsors
       th Number Achieved
-      h3 
+      h3
       tbody
-        tr
-          th IsaaCloud
-          th 15
-        tr
-          th Cisco
-          th 10
-        tr
-          th Namecheap
-          th 9
-        tr
-          th SendGrid
-          th 8
-        tr
-          th GraceNote
-          th 2
+        each rating, i in achievements
+          if i < 5
+            tr
+              th=rating.label
+              th=rating.rank
   if !user.isSponsor
     h2 Top 5 Hackers!
     table(class="table")
@@ -33,7 +23,7 @@ block content
       tr
       th Hackers
       th Sponsors Talked Too
-      h3 
+      h3
       tbody
         tr
           th Jonah Back
@@ -50,4 +40,3 @@ block content
         tr
           th Rachel Law
           th 8
-

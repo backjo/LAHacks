@@ -391,16 +391,27 @@ exports.getAchievements = function(req, res, next)
     //console.log(data.body);
     qrCodes = [];
     var idx = 0;
+    var hashtable = [];
     for(idx = 0; idx<data.body.length; idx++) {
       var apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x150&data=';
       var baseURL = 'https://hackerachievements.com/achievements/';
       var id = data.body[idx].id;
       var hash = crypto.createHash('md5').update('salty' + String(id)).digest('hex').toString();
       data.body[idx].qr = apiUrl + baseURL + id + '/' + hash;
+      hashtable[data.body[idx].id] = {};
+      hashtable[data.body[idx].id].label = data.body[idx].label;
+      hashtable[data.body[idx].id].description = data.body[idx].description;
     }
-    res.render('achievements', {
-      achievements: data.body
-    });
+    isaaClient.getGainedAchievements(req.user.isaa, {},  function(err, data2, response) {
+      console.log(data2.body);
+
+      res.render('achievements', {
+        achievements: data.body,
+        gained: data2.body,
+        hashtable: hashtable
+      });
+    })
+
 
   });
 
@@ -446,14 +457,24 @@ exports.postAchievement = function(req, res, next)
 exports.earnAchievement = function(req, res, next) {
   var hash = crypto.createHash('md5').update('salty' + String(req.params.id) ).digest('hex').toString();
   if(hash === req.params.hash) {
-    console.log(req.params.id);
-    console.log(req.user.isaa);
+
+    isaaClient.getAchievement(req.params.id, {}, function(err, data, request) {
+      isaaClient.updateAchievement(req.params.id, {
+        rank: data.body.rank + 1
+      }, function(err, data, response) {
+        //console.log(err);
+        //console.log(data);
+      });
+    })
     isaaClient.addAchievementToUser(req.user.isaa, {
       achievement: Number(req.params.id)
     }, function(err, data, response) {
       //console.log(err);
       //console.log(data);
     });
+
+
+
   }
 }
 
@@ -464,5 +485,12 @@ exports.getProfilePage = function(req, res, next)
 
 exports.getLeaderboard = function(req, res, next)
 {
-  res.render('leaderboard');
+  isaaClient.getAchievements({rank:true},function(err, data, response) {
+    console.log(data.body);
+    data.body.sort(function(a,b){return b.rank-a.rank})
+    res.render('leaderboard', {
+      achievements: data.body
+    });
+  });
+
 }
