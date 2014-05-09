@@ -1,4 +1,4 @@
-Hacker Achievements
+Hacker Achievements is awesome
 A Social Media app that allows Hackers to connect with other hackers, and sponsors with achievements on both sides!
 
 We have used the framework from hackathon_starter, which allowed us to use many APIs.
